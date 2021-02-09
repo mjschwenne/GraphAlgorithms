@@ -1,0 +1,9 @@
+# Adjacency list of a graph, starting with vertex zero for Python's indexing system.
+# format: s t_0 t_1, is read as s -> t_0, s -> t_1, etc...
+
+# A graph with two disconnected parts, [0, 1] and [2, 3, 4]
+0 1
+1 0
+2 3 4
+3 2 4
+4 2 3

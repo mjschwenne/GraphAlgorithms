@@ -1,8 +1,12 @@
+"""
+This algorithm takes a list of degree sequence and determines if it is graphic.
+If it is graphic, we will generate a graph with that degree sequence.
+
+Algorithm 1.2.1 on page 12
+"""
+
 import networkx as nx
 import matplotlib.pyplot as plt
-
-# This algorithm takes a list of degree sequence and determines if it is graphic.
-# If it is graphic, we will generate a graph with that degree sequence.
 
 # This is the input degree sequence
 deg_seq = [4, 4, 4, 4, 4]
@@ -61,7 +65,10 @@ for k in reversed(range(len(deg_seq))):
                 pts[j - 1].append(v)
 
 # Print where the input sequence is graphic or not
-print(graphic)
+if graphic:
+    print("The degree sequence is graphic!")
+else:
+    print("This sequence is not graphic")
 
 # Display the graph
 if graphic:
