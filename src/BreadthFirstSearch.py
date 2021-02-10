@@ -56,14 +56,30 @@ def bfs(G, u):
 
 def print_bfs_dist(G, u):
     """
-    Perform a breadth first search over G starting with u and print the results
+    Perform a breadth first search over G starting with u and print the results.
 
     Parameters
     ----------
     G : nx.Graph
-        The graph we wish to search
+        The graph we wish to search.
     u : int
-        The origin vertex from which the search starts
+        The origin vertex from which the search starts.
+
+    Examples
+    --------
+    >>> print_bfs_dist(graph, 0)
+    Vertex 0: Dist(0, 0) = 0
+    Vertex 1: Dist(0, 1) = 1
+    Vertex 2: Dist(0, 2) = 1
+    Vertex 3: Dist(0, 3) = 1
+    Vertex 4: Dist(0, 4) = 2
+    Vertex 5: Dist(0, 5) = 2
+    Vertex 6: Dist(0, 6) = 2
+    Vertex 7: Dist(0, 7) = 2
+    Vertex 8: Dist(0, 8) = 2
+    Vertex 9: Dist(0, 9) = 2
+
+    Result of a breadth first search on the petersen graph.
     """
     bfs_dist = bfs(G, u)
     for v in range(len(G)):

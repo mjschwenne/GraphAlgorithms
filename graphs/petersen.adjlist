@@ -1,7 +1,7 @@
 # Adjacency list of a graph, starting with vertex zero for Python's indexing system.
 # format: s t_0 t_1, is read as s -> t_0, s -> t_1, etc...
-
-# The petersen graph, and pentagon with a star in the middle
+#
+# The petersen graph, a pentagon with a star in the middle
 0 1 2 3
 1 0 4 5
 2 0 6 7

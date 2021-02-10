@@ -15,17 +15,17 @@ import matplotlib.pyplot as plt
 
 def graphic(deg_seq):
     """
-    Tests the seq to see if it is graphic. Display the graph if it is
+    Tests the seq to see if it is graphic.
 
     Parameters
     ----------
     deg_seq : List of int
-        The sequence of degree for a proposed graph
+        The sequence of degree for a proposed graph, in any order.
 
     Returns
     -------
     nx.Graph
-        A graph with a degree sequence `deg_seq` or None if the sequence is not graphic
+        A graph with a degree sequence `deg_seq` or None if the sequence is not graphic.
     """
     # We assume that the degree sequence is true so that we can use this as a control variable in our loops
     is_graphic = True
@@ -88,12 +88,24 @@ def graphic(deg_seq):
 
 def print_is_graphic(deg_seq):
     """
-    Takes the degree sequence, tests if it is graphic and then prints the result
+    Takes the degree sequence, tests if it is graphic and then prints the result.
 
     Parameters
     ----------
     deg_seq : List of int
-        The degree sequence to be tested
+        The degree sequence to be tested, in any order.
+
+    Examples
+    --------
+    >>> print_is_graphic([4, 4, 4, 4, 4])
+    The degree sequence is graphic!
+
+    This is the degree sequence for the complete graph on 5 vertices.
+
+    >>> print_is_graphic([7, 6, 6, 6, 5, 5, 2, 1])
+    This sequence is not graphic!
+
+    This sequence is not graphic becuase there are too many vertices of degree 6.
     """
     graph = graphic(deg_seq)
     if graph is not None:
@@ -104,12 +116,12 @@ def print_is_graphic(deg_seq):
 
 def display_graphic_seq(deg_seq):
     """
-    Take the degree sequence, tests if it is graphic and then displays the result
+    Take the degree sequence, tests if it is graphic and then displays the result.
 
     Parameters
     ----------
     deg_seq : List of int
-        The degree sequence to be tested
+        The degree sequence to be tested.
     """
     graph = graphic(deg_seq)
     if graph is not None:
@@ -118,4 +130,4 @@ def display_graphic_seq(deg_seq):
 
 
 if __name__ == '__main__':
-    print_is_graphic([4, 4, 4, 4, 4])
+    print_is_graphic([7, 6, 6, 6, 5, 5, 2, 1])

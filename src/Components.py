@@ -117,6 +117,14 @@ def print_components(G):
     ----------
     G : nx.Graph
         The graph to find the connected components in
+
+    Examples
+    --------
+    >>> print_components(graph)
+    Component Representative: 0, Component Members: 0 1
+    Component Representative: 2, Component Members: 2 3 4
+
+    The components on the graph in ``disconnected.adjlist``.
     """
     comp_list = components(G)
 
