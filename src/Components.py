@@ -2,6 +2,13 @@
 This algorithm takes the graph created in the body of the script and it will print the vertices in each of the
 connected components of the graph.
 
+Each vertex starts in its own component. We then iterate adjacency list of every vertex u and merge u's component with
+the component of each vertex v on the adjacency list.
+
+The `comp_ptr` list tracks the component representative for each component to allow quick determinations on whether
+two vertices are in the same component while the `comp_list` list of lists facilitates displaying the results of the
+algorithm in a concise and efficient manner.
+
 Algorithm 2.1.1 on page 25
 """
 
@@ -71,6 +78,7 @@ def merge(comp_ptr, comp_list, u_rep, v_rep):
 def components(G):
     """
     Find the components of graph G
+
     Parameters
     ----------
     G : nx.Graph

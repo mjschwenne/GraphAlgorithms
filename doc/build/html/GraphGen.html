@@ -14,6 +14,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Components module" href="Components.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -34,17 +35,56 @@
 <span id="graphgen-module"></span><h1>GraphGen module<a class="headerlink" href="#module-GraphGen" title="Permalink to this headline">¶</a></h1>
 <p>This algorithm takes a list of degree sequence and determines if it is graphic.
 If it is graphic, we will generate a graph with that degree sequence.</p>
+<p>Starting at the vertex with highest degree, connect it to that many vertices of the next highest degree.
+Then decrease the remaining degree of those vertices by moving them from one list to the next lowest list.
+If there are no vertices which can still accept the edge, then we know that the sequence is not graphic.</p>
 <p>Algorithm 1.2.1 on page 12</p>
+<dl class="py function">
+<dt id="GraphGen.display_graphic_seq">
+<code class="sig-prename descclassname">GraphGen.</code><code class="sig-name descname">display_graphic_seq</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">deg_seq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#GraphGen.display_graphic_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take the degree sequence, tests if it is graphic and then displays the result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>deg_seq</strong><span class="classifier">List of int</span></dt><dd><p>The degree sequence to be tested</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt id="GraphGen.graphic">
 <code class="sig-prename descclassname">GraphGen.</code><code class="sig-name descname">graphic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">deg_seq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#GraphGen.graphic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tests the seq to see if it is graphic. Display the graph if it is
-Parameters
-———-
-deg_seq : List of int</p>
-<blockquote>
-<div><p>The sequence of degree for a proposed graph</p>
-</div></blockquote>
+<dd><p>Tests the seq to see if it is graphic. Display the graph if it is</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>deg_seq</strong><span class="classifier">List of int</span></dt><dd><p>The sequence of degree for a proposed graph</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>nx.Graph</dt><dd><p>A graph with a degree sequence <cite>deg_seq</cite> or None if the sequence is not graphic</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="GraphGen.print_is_graphic">
+<code class="sig-prename descclassname">GraphGen.</code><code class="sig-name descname">print_is_graphic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">deg_seq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#GraphGen.print_is_graphic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the degree sequence, tests if it is graphic and then prints the result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>deg_seq</strong><span class="classifier">List of int</span></dt><dd><p>The degree sequence to be tested</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -66,11 +106,18 @@ deg_seq : List of int</p>
 
 
 <h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BreadthFirstSearch.html">BreadthFirstSearch module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Components.html">Components module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GraphGen module</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Components.html" title="previous chapter">Components module</a></li>
   </ul></li>
 </ul>
 </div>

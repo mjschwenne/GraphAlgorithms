@@ -14,6 +14,8 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Components module" href="Components.html" />
+    <link rel="prev" title="Welcome to Graph Algorithms’ documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -32,7 +34,13 @@
             
   <div class="section" id="module-BreadthFirstSearch">
 <span id="breadthfirstsearch-module"></span><h1>BreadthFirstSearch module<a class="headerlink" href="#module-BreadthFirstSearch" title="Permalink to this headline">¶</a></h1>
-<p>The breadth first search finds the shortest path from a given vertex to every other vertex in an unweighted simple graph</p>
+<p>The breadth first search finds the shortest path from a given vertex to
+every other vertex in an unweighted simple graph.</p>
+<p>A breadth first search uses a queue, a First-In-First-Out (FIFO) data structure, to find the shortest
+number of edges needed to make a uv-path from the start vertex u to any other vertex v in the graph.
+While there are unprocessed vertices, we pop them off the queue and test to see if we know the distance
+they are from vertex u. If that distance is still infinity we add them to the queue and update the distance to
+be one father than the current vertex we are processing.</p>
 <p>Algorithm 2.4.1 on page 52</p>
 <dl class="py function">
 <dt id="BreadthFirstSearch.bfs">
@@ -91,11 +99,19 @@
 
 
 <h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BreadthFirstSearch module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Components.html">Components module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphGen.html">GraphGen module</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Graph Algorithms’ documentation!</a></li>
+      <li>Next: <a href="Components.html" title="next chapter">Components module</a></li>
   </ul></li>
 </ul>
 </div>

@@ -1,5 +1,12 @@
 """
-The breadth first search finds the shortest path from a given vertex to every other vertex in an unweighted simple graph
+The breadth first search finds the shortest path from a given vertex to
+every other vertex in an unweighted simple graph.
+
+A breadth first search uses a queue, a First-In-First-Out (FIFO) data structure, to find the shortest
+number of edges needed to make a uv-path from the start vertex u to any other vertex v in the graph.
+While there are unprocessed vertices, we pop them off the queue and test to see if we know the distance
+they are from vertex u. If that distance is still infinity we add them to the queue and update the distance to
+be one father than the current vertex we are processing.
 
 Algorithm 2.4.1 on page 52
 """

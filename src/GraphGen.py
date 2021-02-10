@@ -2,6 +2,10 @@
 This algorithm takes a list of degree sequence and determines if it is graphic.
 If it is graphic, we will generate a graph with that degree sequence.
 
+Starting at the vertex with highest degree, connect it to that many vertices of the next highest degree.
+Then decrease the remaining degree of those vertices by moving them from one list to the next lowest list.
+If there are no vertices which can still accept the edge, then we know that the sequence is not graphic.
+
 Algorithm 1.2.1 on page 12
 """
 
@@ -12,10 +16,16 @@ import matplotlib.pyplot as plt
 def graphic(deg_seq):
     """
     Tests the seq to see if it is graphic. Display the graph if it is
+
     Parameters
     ----------
     deg_seq : List of int
         The sequence of degree for a proposed graph
+
+    Returns
+    -------
+    nx.Graph
+        A graph with a degree sequence `deg_seq` or None if the sequence is not graphic
     """
     # We assume that the degree sequence is true so that we can use this as a control variable in our loops
     is_graphic = True
@@ -70,17 +80,42 @@ def graphic(deg_seq):
                     temp[j].pop(0)
                     pts[j - 1].append(v)
 
-    # Print where the input sequence is graphic or not
     if is_graphic:
+        return G
+    else:
+        return None
+
+
+def print_is_graphic(deg_seq):
+    """
+    Takes the degree sequence, tests if it is graphic and then prints the result
+
+    Parameters
+    ----------
+    deg_seq : List of int
+        The degree sequence to be tested
+    """
+    graph = graphic(deg_seq)
+    if graph is not None:
         print("The degree sequence is graphic!")
     else:
-        print("This sequence is not graphic")
+        print("This sequence is not graphic!")
 
-    # Display the graph
-    if is_graphic:
-        nx.draw_circular(G, with_labels=True, font_weight='bold', font_color='white')
+
+def display_graphic_seq(deg_seq):
+    """
+    Take the degree sequence, tests if it is graphic and then displays the result
+
+    Parameters
+    ----------
+    deg_seq : List of int
+        The degree sequence to be tested
+    """
+    graph = graphic(deg_seq)
+    if graph is not None:
+        nx.draw_circular(graph, with_labels=True, font_weight='bold', font_color='white')
         plt.show()
 
 
 if __name__ == '__main__':
-    graphic([4, 4, 4, 4, 4])
+    print_is_graphic([4, 4, 4, 4, 4])
