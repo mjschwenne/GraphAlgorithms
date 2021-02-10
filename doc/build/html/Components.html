@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Components module &#8212; Graph Algorithms 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Components">
+<span id="components-module"></span><h1>Components module<a class="headerlink" href="#module-Components" title="Permalink to this headline">¶</a></h1>
+<p>This algorithm takes the graph created in the body of the script and it will print the vertices in each of the
+connected components of the graph.</p>
+<p>Algorithm 2.1.1 on page 25</p>
+<dl class="py function">
+<dt id="Components.comp_rep">
+<code class="sig-prename descclassname">Components.</code><code class="sig-name descname">comp_rep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_ptr</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Components.comp_rep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the component representative for the input vertex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>comp_ptr</strong><span class="classifier">list</span></dt><dd><p>The list of component pointers</p>
+</dd>
+<dt><strong>u</strong><span class="classifier">int</span></dt><dd><p>The vertex of interest</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>The component representative of the component u is a part of</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Components.components">
+<code class="sig-prename descclassname">Components.</code><code class="sig-name descname">components</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Components.components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the components of graph G
+Parameters
+———-
+G : nx.Graph</p>
+<blockquote>
+<div><p>The graph to find the connected components in</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>A list of lists such that each non-None list contains the vertices of that component</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Components.merge">
+<code class="sig-prename descclassname">Components.</code><code class="sig-name descname">merge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_ptr</span></em>, <em class="sig-param"><span class="n">comp_list</span></em>, <em class="sig-param"><span class="n">u_rep</span></em>, <em class="sig-param"><span class="n">v_rep</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Components.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge the smaller component into the larger one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>comp_ptr</strong><span class="classifier">List of int</span></dt><dd><p>The list of component pointers</p>
+</dd>
+<dt><strong>comp_list</strong><span class="classifier">List of List</span></dt><dd><p>The list of lists which tracks vertices in a format conducive to printing them</p>
+</dd>
+<dt><strong>u_rep</strong><span class="classifier">int</span></dt><dd><p>The component representative for the first component</p>
+</dd>
+<dt><strong>v_rep</strong><span class="classifier">int</span></dt><dd><p>The component representative for the first component</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Components.print_components">
+<code class="sig-prename descclassname">Components.</code><code class="sig-name descname">print_components</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Components.print_components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the connected components of G and print them</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph to find the connected components in</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Graph Algorithms</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Matt Schwennesen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Components.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

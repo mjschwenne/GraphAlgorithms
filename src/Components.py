@@ -39,9 +39,9 @@ def merge(comp_ptr, comp_list, u_rep, v_rep):
 
     Parameters
     ----------
-    comp_ptr : list
+    comp_ptr : List of int
         The list of component pointers
-    comp_list : list
+    comp_list : List of List
         The list of lists which tracks vertices in a format conducive to printing them
     u_rep : int
         The component representative for the first component
@@ -117,6 +117,6 @@ def print_components(G):
             print(f"Component Representative: {c[0]}, Component Members:", *c)
 
 
-# Create the graph and call the algorithm, then print result
-graph = nx.readwrite.read_adjlist("graphs/disconnected.adjlist", nodetype=int)
-print_components(graph)
+if __name__ == '__main__':
+    graph = nx.readwrite.read_adjlist("../graphs/disconnected.adjlist", nodetype=int)
+    print_components(graph)
