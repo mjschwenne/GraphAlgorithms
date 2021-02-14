@@ -8,7 +8,7 @@ While there are unprocessed vertices, we pop them off the queue and test to see 
 they are from vertex u. If that distance is still infinity we add them to the queue and update the distance to
 be one father than the current vertex we are processing.
 
-Algorithm 2.4.1 on page 52
+Algorithm 2.4.1 on page 52, however we are using a true queue rather than an array processed in queue order.
 """
 
 import networkx as nx

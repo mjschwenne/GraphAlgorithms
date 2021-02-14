@@ -1,9 +1,12 @@
 """
 This is Dijkstra's algorithm for finding the shortest path in a weighted graph.
 
-It uses a priority queue to track the next smallest vertex to add to the vertex cloud.
+It uses a priority queue to track the next closest vertex to add to the vertex cloud.
+We assume that every vertex other than the starting one has a distance of infinity and added them to the priority queue.
+Next, we pull from the priority queue and compare the distance to each of that vertex's neighbors to see if we have
+found a shorter path. Update the distance in the priority queue and ensure it is still in heap order.
 
-Algorithm 2.5.1 on page 35
+Algorithm 2.5.1 on page 35, however we are uses a priority queue rather than a list of vertices.
 """
 import networkx as nx
 import heapq
