@@ -28,7 +28,8 @@ def comp_rep(comp_ptr, u):
 
     Returns
     -------
-    The component representative of the component u is a part of
+    int :
+        The component representative of the component u is a part of
     """
     # The pointer for the representative vertex is equal to negative the size of the component
     if comp_ptr[u] < 0:
@@ -86,7 +87,8 @@ def components(G):
 
     Returns
     -------
-    A list of lists such that each non-None list contains the vertices of that component
+    List of List
+        A list of lists such that each non-None list contains the vertices of that component
     """
     # Create and initialize the lists
     # comp_ptr is seeded with -1 as each vertex is in its own component at the start of the algorithm

@@ -29,8 +29,9 @@ def bfs(G, u):
 
     Returns
     -------
-    A list dist where dist[v] is the distance of the shortest path from u to v.
-    Note, dist[u] = 0
+    List
+        A list dist where dist[v] is the distance of the shortest path from u to v.
+        Note, dist[u] = 0
     """
     # initialize the distance list to infinity for every vertex except u, which has a distance of 0
     dist = list()
