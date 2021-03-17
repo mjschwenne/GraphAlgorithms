@@ -11,10 +11,12 @@ Welcome to Graph Algorithms' documentation!
    :caption: Contents:
 
    BreadthFirstSearch
+   ChordlessPath
    Components
    Dijkstra
    Floyd
    GraphGen
+   planar-display
 
 Indices and tables
 ==================

@@ -1,0 +1,7 @@
+planar\-display module
+======================
+
+.. automodule:: planar-display
+   :members:
+   :undoc-members:
+   :show-inheritance:

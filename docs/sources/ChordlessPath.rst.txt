@@ -1,0 +1,7 @@
+ChordlessPath module
+====================
+
+.. automodule:: ChordlessPath
+   :members:
+   :undoc-members:
+   :show-inheritance:

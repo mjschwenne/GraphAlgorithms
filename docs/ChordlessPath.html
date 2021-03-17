@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChordlessPath module &#8212; Graph Algorithms 1.0 documentation</title>
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Components module" href="Components.html" />
+    <link rel="prev" title="BreadthFirstSearch module" href="BreadthFirstSearch.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ChordlessPath">
+<span id="chordlesspath-module"></span><h1>ChordlessPath module<a class="headerlink" href="#module-ChordlessPath" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="ChordlessPath.bfs_path">
+<code class="sig-prename descclassname">ChordlessPath.</code><code class="sig-name descname">bfs_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em>, <em class="sig-param"><span class="n">source</span></em>, <em class="sig-param"><span class="n">destination</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ChordlessPath.bfs_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use a breadth first search to find the path from vertex <cite>source</cite> to vertex <cite>destination</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph to search</p>
+</dd>
+<dt><strong>source</strong><span class="classifier">Point</span></dt><dd><p>Origin point</p>
+</dd>
+<dt><strong>destination</strong><span class="classifier">Point</span></dt><dd><p>Destination point</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>deque</dt><dd><p>A queue with the path from <cite>source</cite> to <cite>destination</cite> already enqueued.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ChordlessPath.chordless_path">
+<code class="sig-prename descclassname">ChordlessPath.</code><code class="sig-name descname">chordless_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em>, <em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">Q</span></em>, <em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">master_Q</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ChordlessPath.chordless_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all the chordless paths from <cite>source</cite> to <cite>target</cite>.</p>
+<p><cite>Q</cite> and <cite>P</cite> are recursive helper variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The Graph to find the chordless paths in</p>
+</dd>
+<dt><strong>t</strong><span class="classifier">Point</span></dt><dd><p>The target point for the path</p>
+</dd>
+<dt><strong>Q</strong><span class="classifier">List</span></dt><dd><p>A list of the current path from the original source to <cite>target</cite></p>
+</dd>
+<dt><strong>P</strong><span class="classifier">deque</span></dt><dd><p>A SimpleQueue representing the breadth first search path from <cite>source</cite> to <cite>target</cite></p>
+</dd>
+<dt><strong>master_Q</strong><span class="classifier">List of List</span></dt><dd><p>A List of List such that each list in the list is a chordless path</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>List</dt><dd><p>The list of vertices from the original source to the target vertex</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ChordlessPath.comp_rep">
+<code class="sig-prename descclassname">ChordlessPath.</code><code class="sig-name descname">comp_rep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_ptr</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ChordlessPath.comp_rep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the component representative for the input vertex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>comp_ptr</strong><span class="classifier">Dict</span></dt><dd><p>The dictionary of component pointers</p>
+</dd>
+<dt><strong>u</strong><span class="classifier">Point</span></dt><dd><p>The vertex of interest</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Point :</dt><dd><p>The component representative of the component u is a part of</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ChordlessPath.components">
+<code class="sig-prename descclassname">ChordlessPath.</code><code class="sig-name descname">components</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ChordlessPath.components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the components of graph G</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph to find the connected components in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Dict of Point</dt><dd><p>A dictionary such that each Point in the dictionary points to it’s component representative or the size of
+the component that it represents</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ChordlessPath.merge">
+<code class="sig-prename descclassname">ChordlessPath.</code><code class="sig-name descname">merge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_ptr</span></em>, <em class="sig-param"><span class="n">u_rep</span></em>, <em class="sig-param"><span class="n">v_rep</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ChordlessPath.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge the smaller component into the larger one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>comp_ptr</strong><span class="classifier">Dict of Point</span></dt><dd><p>The list of component pointers</p>
+</dd>
+<dt><strong>u_rep</strong><span class="classifier">Point</span></dt><dd><p>The component representative for the first component</p>
+</dd>
+<dt><strong>v_rep</strong><span class="classifier">Point</span></dt><dd><p>The component representative for the first component</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ChordlessPath.remove_edge">
+<code class="sig-prename descclassname">ChordlessPath.</code><code class="sig-name descname">remove_edge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ChordlessPath.remove_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the edge <cite>u``v</cite> from graph <cite>G</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph from which the edge will be removed</p>
+</dd>
+<dt><strong>u</strong><span class="classifier">Point</span></dt><dd><p>The first endpoint of the edge</p>
+</dd>
+<dt><strong>v</strong><span class="classifier">Point</span></dt><dd><p>The second endpoint of the edge</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>nx.Graph</dt><dd><p>A copy of the graph <cite>G</cite> without the <cite>u``v</cite> edge</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ChordlessPath.remove_vertices">
+<code class="sig-prename descclassname">ChordlessPath.</code><code class="sig-name descname">remove_vertices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em>, <em class="sig-param"><span class="n">vertices</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ChordlessPath.remove_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all vertices in <cite>vertices</cite> from the graph <cite>G</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph from which vertices will be removed</p>
+</dd>
+<dt><strong>vertices</strong><span class="classifier">list</span></dt><dd><p>The list of vertices in G to be removed</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>nx.Graph</dt><dd><p>A copy of the graph <cite>G</cite> without the vertices listed in <cite>vertices</cite></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Graph Algorithms</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BreadthFirstSearch.html">BreadthFirstSearch module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ChordlessPath module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Components.html">Components module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dijkstra.html">Dijkstra module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Floyd.html">Floyd module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphGen.html">GraphGen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="planar-display.html">planar-display module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="BreadthFirstSearch.html" title="previous chapter">BreadthFirstSearch module</a></li>
+      <li>Next: <a href="Components.html" title="next chapter">Components module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Matt Schwennesen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="sources/ChordlessPath.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
