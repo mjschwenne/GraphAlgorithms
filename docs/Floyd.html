@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floyd module &#8212; Graph Algorithms 1.0 documentation</title>
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GraphGen module" href="GraphGen.html" />
+    <link rel="prev" title="Dijkstra module" href="Dijkstra.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Floyd">
+<span id="floyd-module"></span><h1>Floyd module<a class="headerlink" href="#module-Floyd" title="Permalink to this headline">¶</a></h1>
+<p>This is Floyd’s algorithm for finding the shortest distance between any two pair of vertices in the graph, also
+known as the all-paths problem.</p>
+<dl>
+<dt>It works by using a weighted adjacency matrix such that</dt><dd><p>If <span class="math notranslate nohighlight">\(u \rightarrow v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = \text{Wt}(uv)\)</span></p>
+<p>If <span class="math notranslate nohighlight">\(u \not\rightarrow v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = \infty\)</span></p>
+<p>If <span class="math notranslate nohighlight">\(u = v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = 0\)</span></p>
+</dd>
+</dl>
+<p>It then attempts to route a path from every vertex through every other vertex to the destination vertex.</p>
+<p>Algorithm 2.7.1 on page 41</p>
+<dl class="py function">
+<dt id="Floyd.build_matrix">
+<code class="sig-prename descclassname">Floyd.</code><code class="sig-name descname">build_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Floyd.build_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the weighted adjacency matrix from the graph G.</p>
+<p>If <span class="math notranslate nohighlight">\(u \rightarrow v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = \text{Wt}(uv)\)</span></p>
+<p>If <span class="math notranslate nohighlight">\(u \not\rightarrow v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = \infty\)</span></p>
+<p>If <span class="math notranslate nohighlight">\(u = v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = 0\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph that we need to build a weighted adjacency matrix for.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>np.ndarray</dt><dd><p>The weighted adjacency matrix</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Floyd.floyd">
+<code class="sig-prename descclassname">Floyd.</code><code class="sig-name descname">floyd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Floyd.floyd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs Floyd’s algorithm for the all-paths problem, returning a matrix such that M[v, u] is the shortest distance
+between <cite>u</cite> and <cite>v</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph we wish to solve the all-paths problem on</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>np.ndarray</dt><dd><p>An n by n matrix with the shortest distance between any two vertices encoded in it.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Graph Algorithms</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BreadthFirstSearch.html">BreadthFirstSearch module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Components.html">Components module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dijkstra.html">Dijkstra module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Floyd module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphGen.html">GraphGen module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Dijkstra.html" title="previous chapter">Dijkstra module</a></li>
+      <li>Next: <a href="GraphGen.html" title="next chapter">GraphGen module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Matt Schwennesen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="sources/Floyd.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

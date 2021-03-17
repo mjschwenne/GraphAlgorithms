@@ -1,0 +1,7 @@
+Floyd module
+============
+
+.. automodule:: Floyd
+   :members:
+   :undoc-members:
+   :show-inheritance:

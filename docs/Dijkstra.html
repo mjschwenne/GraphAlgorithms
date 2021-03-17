@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dijkstra module &#8212; Graph Algorithms 1.0 documentation</title>
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Floyd module" href="Floyd.html" />
+    <link rel="prev" title="Components module" href="Components.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Dijkstra">
+<span id="dijkstra-module"></span><h1>Dijkstra module<a class="headerlink" href="#module-Dijkstra" title="Permalink to this headline">¶</a></h1>
+<p>This is Dijkstra’s algorithm for finding the shortest path in a weighted graph.</p>
+<p>It uses a priority queue to track the next closest vertex to add to the vertex cloud.
+We assume that every vertex other than the starting one has a distance of infinity and added them to the priority queue.
+Next, we pull from the priority queue and compare the distance to each of that vertex’s neighbors to see if we have
+found a shorter path. Update the distance in the priority queue and ensure it is still in heap order.</p>
+<p>Algorithm 2.5.1 on page 35, however we are uses a priority queue rather than a list of vertices.</p>
+<dl class="py function">
+<dt id="Dijkstra.dijkstra">
+<code class="sig-prename descclassname">Dijkstra.</code><code class="sig-name descname">dijkstra</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Dijkstra.dijkstra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Dijkstra’s algorithm on the graph <cite>G</cite> from origin vertex <cite>u</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph we wish to find the shortest paths though</p>
+</dd>
+<dt><strong>u</strong><span class="classifier">int</span></dt><dd><p>The origin vertex, or where each path must start</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>List</dt><dd><p>The list of shortest distances, such that list[v] = Dist(u, v)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Graph Algorithms</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BreadthFirstSearch.html">BreadthFirstSearch module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Components.html">Components module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Dijkstra module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Floyd.html">Floyd module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphGen.html">GraphGen module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Components.html" title="previous chapter">Components module</a></li>
+      <li>Next: <a href="Floyd.html" title="next chapter">Floyd module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Matt Schwennesen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="sources/Dijkstra.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
