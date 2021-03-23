@@ -84,12 +84,8 @@ def kruskal(G):
         components[v] = -1
     # Create an construct the heap of edges
     heap = []
-    # Store items for update later with the form [edge_weight, edge_tuple] as a key-value pair
-    heap_map = {}
     for e in G.edges:
-        edge_tuple = (e[0], e[1])
-        heap_map[edge_tuple] = [G[e[0]][e[1]]['weight'], edge_tuple]
-        heapq.heappush(heap, heap_map[edge_tuple])
+        heapq.heappush(heap, [G[e[0]][e[1]]['weight'], (e[0], e[1])])
 
     # While we don't have enough edges to make a tree
     while tree.number_of_edges() < len(G) - 1:
