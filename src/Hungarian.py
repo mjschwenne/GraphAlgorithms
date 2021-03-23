@@ -65,9 +65,7 @@ def hungarian(G, X):
         next_vert = False
         while not next_vert and k < len(s):
             x = s[k]
-            print(f"x: {x}, s: {s}, h[{x}] = {h[x]}")
             for y in h[x]:
-                print(f"y: {y}, match[{y}] = {match[y]}")
                 if y not in ns:
                     ns.add(y)
                     prev_pt[y] = x
@@ -79,7 +77,6 @@ def hungarian(G, X):
                     s.append(match[y])
             k += 1
         if not next_vert:
-            print(f"remove {s} and {ns}")
             h.remove_nodes_from(s)
             h.remove_nodes_from(ns)
     # the match dictionary now has the completed matching, we can return it
