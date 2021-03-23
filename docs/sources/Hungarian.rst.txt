@@ -1,0 +1,7 @@
+Hungarian module
+================
+
+.. automodule:: Hungarian
+   :members:
+   :undoc-members:
+   :show-inheritance:

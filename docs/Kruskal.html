@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Floyd module &#8212; Graph Algorithms 1.0 documentation</title>
+    <title>Kruskal module &#8212; Graph Algorithms 1.0 documentation</title>
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GraphGen module" href="GraphGen.html" />
-    <link rel="prev" title="Dijkstra module" href="Dijkstra.html" />
+    <link rel="next" title="planar-display module" href="planar-display.html" />
+    <link rel="prev" title="Hungarian module" href="Hungarian.html" />
    
   <link rel="stylesheet" href="static/custom.css" type="text/css" />
   
@@ -33,35 +33,28 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-Floyd">
-<span id="floyd-module"></span><h1>Floyd module<a class="headerlink" href="#module-Floyd" title="Permalink to this headline">¶</a></h1>
-<p>This is Floyd’s algorithm for finding the shortest distance between any two pair of vertices in the graph, also
-known as the all-paths problem.</p>
-<dl>
-<dt>It works by using a weighted adjacency matrix such that</dt><dd><p>If <span class="math notranslate nohighlight">\(u \rightarrow v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = \text{Wt}(uv)\)</span></p>
-<p>If <span class="math notranslate nohighlight">\(u \not\rightarrow v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = \infty\)</span></p>
-<p>If <span class="math notranslate nohighlight">\(u = v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = 0\)</span></p>
-</dd>
-</dl>
-<p>It then attempts to route a path from every vertex through every other vertex to the destination vertex.</p>
-<p>Algorithm 2.7.1 on page 41</p>
+  <div class="section" id="module-Kruskal">
+<span id="kruskal-module"></span><h1>Kruskal module<a class="headerlink" href="#module-Kruskal" title="Permalink to this headline">¶</a></h1>
+<p>Kruskal’s algorithm for a minimum spanning tree. Using the idea of a forest, we pick minimum weight edges from the graph
+and use them to connect components. Each component is a tree itself and once we have connected every component our
+forest as grown into a beautiful spanning tree.</p>
+<p>Algorithm 5.4.2 on page 85</p>
 <dl class="py function">
-<dt id="Floyd.build_matrix">
-<code class="sig-prename descclassname">Floyd.</code><code class="sig-name descname">build_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Floyd.build_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build the weighted adjacency matrix from the graph G.</p>
-<p>If <span class="math notranslate nohighlight">\(u \rightarrow v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = \text{Wt}(uv)\)</span></p>
-<p>If <span class="math notranslate nohighlight">\(u \not\rightarrow v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = \infty\)</span></p>
-<p>If <span class="math notranslate nohighlight">\(u = v\)</span> than <span class="math notranslate nohighlight">\(A[u, v] = 0\)</span></p>
+<dt id="Kruskal.comp_rep">
+<code class="sig-prename descclassname">Kruskal.</code><code class="sig-name descname">comp_rep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_ptr</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kruskal.comp_rep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the component representative for the input vertex</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph that we need to build a weighted adjacency matrix for.</p>
+<dt><strong>comp_ptr</strong><span class="classifier">list</span></dt><dd><p>The list of component pointers</p>
+</dd>
+<dt><strong>u</strong><span class="classifier">int</span></dt><dd><p>The vertex of interest</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>The weighted adjacency matrix</p>
+<dt>int :</dt><dd><p>The component representative of the component u is a part of</p>
 </dd>
 </dl>
 </dd>
@@ -69,20 +62,36 @@ known as the all-paths problem.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="Floyd.floyd">
-<code class="sig-prename descclassname">Floyd.</code><code class="sig-name descname">floyd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Floyd.floyd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Performs Floyd’s algorithm for the all-paths problem, returning a matrix such that M[v, u] is the shortest distance
-between <cite>u</cite> and <cite>v</cite>.</p>
+<dt id="Kruskal.kruskal">
+<code class="sig-prename descclassname">Kruskal.</code><code class="sig-name descname">kruskal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">G</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kruskal.kruskal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Kruskal’s minimum spanning tree algorithm on the graph</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd><p>The graph we wish to solve the all-paths problem on</p>
-</dd>
+<dt><strong>G</strong><span class="classifier">nx.Graph</span></dt><dd></dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>np.ndarray</dt><dd><p>An n by n matrix with the shortest distance between any two vertices encoded in it.</p>
+<dt>nx.Graph</dt><dd><p>The minimum spanning tree of the graph</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Kruskal.merge">
+<code class="sig-prename descclassname">Kruskal.</code><code class="sig-name descname">merge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_ptr</span></em>, <em class="sig-param"><span class="n">u_rep</span></em>, <em class="sig-param"><span class="n">v_rep</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Kruskal.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge the smaller component into the larger one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>comp_ptr</strong><span class="classifier">List of int</span></dt><dd><p>The list of component pointers</p>
+</dd>
+<dt><strong>u_rep</strong><span class="classifier">int</span></dt><dd><p>The component representative for the first component</p>
+</dd>
+<dt><strong>v_rep</strong><span class="classifier">int</span></dt><dd><p>The component representative for the first component</p>
 </dd>
 </dl>
 </dd>
@@ -114,10 +123,10 @@ between <cite>u</cite> and <cite>v</cite>.</p>
 <li class="toctree-l1"><a class="reference internal" href="ChordlessPath.html">ChordlessPath module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Components.html">Components module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Dijkstra.html">Dijkstra module</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Floyd module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Floyd.html">Floyd module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="GraphGen.html">GraphGen module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Hungarian.html">Hungarian module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Kruskal.html">Kruskal module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kruskal module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="planar-display.html">planar-display module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Prim.html">Prim module</a></li>
 </ul>
@@ -126,8 +135,8 @@ between <cite>u</cite> and <cite>v</cite>.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="Dijkstra.html" title="previous chapter">Dijkstra module</a></li>
-      <li>Next: <a href="GraphGen.html" title="next chapter">GraphGen module</a></li>
+      <li>Previous: <a href="Hungarian.html" title="previous chapter">Hungarian module</a></li>
+      <li>Next: <a href="planar-display.html" title="next chapter">planar-display module</a></li>
   </ul></li>
 </ul>
 </div>
@@ -161,7 +170,7 @@ between <cite>u</cite> and <cite>v</cite>.</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="sources/Floyd.rst.txt"
+      <a href="sources/Kruskal.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

@@ -16,7 +16,10 @@ Welcome to Graph Algorithms' documentation!
    Dijkstra
    Floyd
    GraphGen
+   Hungarian
+   Kruskal
    planar-display
+   Prim
 
 Indices and tables
 ==================

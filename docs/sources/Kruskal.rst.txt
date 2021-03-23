@@ -1,0 +1,7 @@
+Kruskal module
+==============
+
+.. automodule:: Kruskal
+   :members:
+   :undoc-members:
+   :show-inheritance:

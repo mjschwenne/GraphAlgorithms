@@ -1,5 +1,6 @@
 """
 The Hungarian algorithm for finding the maximum matching in a bipartite graph. We use a breadth first search to find
+augmenting paths, then flip the edges to create a matching with an additional edge.
 
 
 Algorithm 9.2.1 on page 174

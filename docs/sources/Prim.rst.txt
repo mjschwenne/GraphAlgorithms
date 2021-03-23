@@ -1,0 +1,7 @@
+Prim module
+===========
+
+.. automodule:: Prim
+   :members:
+   :undoc-members:
+   :show-inheritance:
