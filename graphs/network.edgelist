@@ -1,0 +1,11 @@
+# Sample network used in class for the Ford-Fulkerson Algorithm
+#
+# Format is src dest edge dictionary
+0 1 {'capacity': 8}
+0 2 {'capacity': 6}
+1 3 {'capacity': 3}
+1 4 {'capacity': 1}
+2 4 {'capacity': 4}
+4 3 {'capacity': 7}
+3 5 {'capacity': 4}
+4 5 {'capacity': 5}
