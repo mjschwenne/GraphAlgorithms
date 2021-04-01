@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FordFulkerson module &#8212; Graph Algorithms 1.0 documentation</title>
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GraphGen module" href="GraphGen.html" />
+    <link rel="prev" title="Floyd module" href="Floyd.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-FordFulkerson">
+<span id="fordfulkerson-module"></span><h1>FordFulkerson module<a class="headerlink" href="#module-FordFulkerson" title="Permalink to this headline">¶</a></h1>
+<p>The Ford-Fulkerson Algorithm find the maximum flow in a network, a directed graph from a source vertex <cite>s</cite> to a target
+vertex <cite>t</cite>. Each edge in the graph has a capacity which may not be exceeded by the flow running through the graph.
+Additionally, the amount of flow into a vertex must equal the flow out of that vertex.</p>
+<p>The Ford-Fulkerson algorithm finding the maximum flow using the concept of augmenting paths. An augmenting path in a
+network is a path form <cite>s</cite> to <cite>t</cite> using only edges with have residual capacity. If there are no such paths, then the
+flow is maximum. Forward edges follow the direction of the arc in the network while backwards edges move against the
+arc in the network. Backwards edges can have there flow reduced to increase the overall flow of the network</p>
+<p>Algorithm 10.2.2 on page 201</p>
+<dl class="py function">
+<dt id="FordFulkerson.augment_flow">
+<code class="sig-prename descclassname">FordFulkerson.</code><code class="sig-name descname">augment_flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">prev_pt</span></em>, <em class="sig-param"><span class="n">res_cap</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FordFulkerson.augment_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take the augmenting path to <cite>t</cite> and increase the flow so that it is no longer augmenting</p>
+<p>All operations are done in place to the network <cite>N</cite>. The <cite>prev_pt</cite> of the start of the path is assumed to be <cite>None</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>N</strong><span class="classifier">nx.DiGraph</span></dt><dd><p>The network with contains the augmenting path</p>
+</dd>
+<dt><strong>t</strong><span class="classifier">int</span></dt><dd><p>The terminal vertex of the augmenting path</p>
+</dd>
+<dt><strong>prev_pt</strong><span class="classifier">Dict</span></dt><dd><p>A mapping of the vertices to the predecessor vertex in the path</p>
+</dd>
+<dt><strong>res_cap</strong><span class="classifier">Dict</span></dt><dd><p>A mapping from vertex <cite>v</cite> to the residual capacity of the <cite>s</cite>-<cite>v</cite> path</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="FordFulkerson.ford_fulkerson">
+<code class="sig-prename descclassname">FordFulkerson.</code><code class="sig-name descname">ford_fulkerson</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#FordFulkerson.ford_fulkerson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs the Ford-Fulkerson Algorithm on the given network to find the maximum flow of the network.</p>
+<p>Results of the algorithm are stored in place in <cite>N</cite> and the value of the flow is returned.
+Edge attribute capacity is assumed to set for each edge</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>N</strong><span class="classifier">nx.DiGraph</span></dt><dd></dd>
+<dt><strong>s</strong><span class="classifier">int</span></dt><dd><p>The source vertex of the network</p>
+</dd>
+<dt><strong>t</strong><span class="classifier">int</span></dt><dd><p>The target vertex of the network</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>The value of the maximum flow</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Graph Algorithms</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BreadthFirstSearch.html">BreadthFirstSearch module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChordlessPath.html">ChordlessPath module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Components.html">Components module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dijkstra.html">Dijkstra module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Floyd.html">Floyd module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FordFulkerson module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphGen.html">GraphGen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hungarian.html">Hungarian module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kruskal.html">Kruskal module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Prim.html">Prim module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Floyd.html" title="previous chapter">Floyd module</a></li>
+      <li>Next: <a href="GraphGen.html" title="next chapter">GraphGen module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Matt Schwennesen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="sources/FordFulkerson.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

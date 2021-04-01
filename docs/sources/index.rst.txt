@@ -15,10 +15,10 @@ Welcome to Graph Algorithms' documentation!
    Components
    Dijkstra
    Floyd
+   FordFulkerson
    GraphGen
    Hungarian
    Kruskal
-   planar-display
    Prim
 
 Indices and tables

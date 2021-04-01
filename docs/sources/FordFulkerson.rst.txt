@@ -1,0 +1,7 @@
+FordFulkerson module
+====================
+
+.. automodule:: FordFulkerson
+   :members:
+   :undoc-members:
+   :show-inheritance:

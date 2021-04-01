@@ -1,7 +1,7 @@
 # Adjacency list of a graph, starting with vertex zero for Python's indexing system.
 # format: s t_0 t_1, is read as s -> t_0, s -> t_1, etc...
 #
-# The graph which is part of 5.3.8 on page 79
+# This graph was used to demonstrate the Hungarian algorithm in class
 0 4 5
 1 4
 2 5

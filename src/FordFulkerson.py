@@ -1,22 +1,29 @@
 """
+The Ford-Fulkerson Algorithm find the maximum flow in a network, a directed graph from a source vertex `s` to a target
+vertex `t`. Each edge in the graph has a capacity which may not be exceeded by the flow running through the graph.
+Additionally, the amount of flow into a vertex must equal the flow out of that vertex.
 
+The Ford-Fulkerson algorithm finding the maximum flow using the concept of augmenting paths. An augmenting path in a
+network is a path form `s` to `t` using only edges with have residual capacity. If there are no such paths, then the
+flow is maximum. Forward edges follow the direction of the arc in the network while backwards edges move against the
+arc in the network. Backwards edges can have there flow reduced to increase the overall flow of the network
+
+Algorithm 10.2.2 on page 201
 """
 import networkx as nx
 from itertools import chain
 
 
-def augment_flow(N, s, t, prev_pt, res_cap):
+def augment_flow(N, t, prev_pt, res_cap):
     """
     Take the augmenting path to `t` and increase the flow so that it is no longer augmenting
 
-    All operations are done in place to the network `N`
+    All operations are done in place to the network `N`. The `prev_pt` of the start of the path is assumed to be `None`.
 
     Parameters
     ----------
     N : nx.DiGraph
         The network with contains the augmenting path
-    s : int
-        The starting vertex of the augmenting path
     t : int
         The terminal vertex of the augmenting path
     prev_pt : Dict
@@ -28,7 +35,7 @@ def augment_flow(N, s, t, prev_pt, res_cap):
     u = prev_pt[v]
     delta = res_cap[t]
     # While we are not at the start of the augmenting path
-    while u is not s:
+    while u is not None:
         if v in N[u]:
             N[u][v]['flow'] += delta
         else:
@@ -66,7 +73,7 @@ def ford_fulkerson(N, s, t):
         res_cap[s] += N[s][v]['capacity']
         res_cap[v] = N[s][v]['capacity']
     # Create and initialize the prev_pt list used to track the breadth first search of the algorithm
-    prev_pt = dict()
+    prev_pt = {s: None}
     # While there could be an augmenting path in the graph
     while True:
         # Similar to the Hungarian algorithm, the textbook describes q as a queue, but it is not one as we need to be
@@ -113,11 +120,13 @@ def ford_fulkerson(N, s, t):
         # if k >= len(q) then there is no augmenting path left in the graph
         if k >= len(q):
             return flow
-        augment_flow(N, s, t, prev_pt, res_cap)
+        augment_flow(N, t, prev_pt, res_cap)
         flow += res_cap[t]
-        prev_pt.clear()
+        prev_pt = {s: None}
 
 
 if __name__ == '__main__':
     network = nx.read_edgelist("../graphs/network.edgelist", create_using=nx.DiGraph, nodetype=int)
-    print(ford_fulkerson(network, 0, 5))
+    print(f"The total value of the flow is {ford_fulkerson(network, 0, 5)}")
+    for x, y in network.edges:
+        print(f"For edge {x} -> {y} the flow is {network[x][y]['flow']}")
