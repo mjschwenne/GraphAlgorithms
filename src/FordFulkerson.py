@@ -126,7 +126,7 @@ def ford_fulkerson(N, s, t):
 
 
 if __name__ == '__main__':
-    network = nx.read_edgelist("../graphs/network.edgelist", create_using=nx.DiGraph, nodetype=int)
-    print(f"The total value of the flow is {ford_fulkerson(network, 0, 5)}")
+    network = nx.read_edgelist("../graphs/hw8.edgelist", create_using=nx.DiGraph, nodetype=int)
+    print(f"The total value of the flow is {ford_fulkerson(network, 0, 7)}")
     for x, y in network.edges:
         print(f"For edge {x} -> {y} the flow is {network[x][y]['flow']}")
