@@ -112,6 +112,10 @@ def phase1(tableau, pivots):
     -------
     SimplexState
         If the linear program is still feasible or why not
+    List
+        The list of pivots in each row
+    numpy.ndarray
+        The new tableau... I'm not happy about returning this but we need to return the local tableau
     """
     # Insert a new column to the left of the adjacency matrix and a row below c transpose
     # New column of all zeros
@@ -126,31 +130,34 @@ def phase1(tableau, pivots):
     # Extra -1 to index from zero
     n -= 2
     # Put -1 in the artificial variable if the entry in X_B is negative
-    for i in range(m):
+    for i in range(m + 1):
         if tableau[i][n + 1] < 0:
             tableau[i][0] = -1
     tableau[m + 2][0] = 1
     # The phase 1 tableau is now complete, find the first pivot
     r = -1
     most_negative = 0
-    for i in range(m):
+    for i in range(m + 1):
         if tableau[i][n + 1] < most_negative:
             most_negative = tableau[i][n + 1]
             r = i
 
     # If the basis solution is a basis feasible solution
     if r < 0:
-        return SimplexState.FEASIBLE, pivots
+        # Remove the extra row and column from the tableau
+        tableau = np.delete(tableau, 0, 1)
+        tableau = np.delete(tableau, m + 2, 0)
+        return SimplexState.FEASIBLE, pivots, tableau
 
     # Pivot on the artificial variable for the most negative entry in X_B
     # No need to record it because it will be deleted from the tableau at the end of the phase
     pivot(tableau, r, 0)
 
     c = 1
-    while c < n:
+    while c <= n:
         if tableau[m + 2][c] < 0:
             # Similar to phase 2, find the positive entry in this column with the smallest ratio to the entries in X_B
-            i = 1
+            i = 0
             while tableau[i][c] <= 0:
                 i += 1
             ratio = tableau[i][n + 1] / tableau[i][c]
@@ -159,7 +166,7 @@ def phase1(tableau, pivots):
             while i <= m:
                 if tableau[i][c] > 0 and tableau[i][n + 1] / tableau[i][c] < ratio:
                     ratio = tableau[i][n + 1] / tableau[i][c]
-                    r += 1
+                    r = i
                 i += 1
             # Pivot on that entry
             pivot(tableau, r, c)
@@ -174,12 +181,12 @@ def phase1(tableau, pivots):
         # Remove the extra row and column from the tableau
         tableau = np.delete(tableau, 0, 1)
         tableau = np.delete(tableau, m + 2, 0)
-        return SimplexState.INFEASIBLE, None
+        return SimplexState.INFEASIBLE, None, tableau
     else:
         # Remove the extra row and column from the tableau
         tableau = np.delete(tableau, 0, 1)
         tableau = np.delete(tableau, m + 2, 0)
-        return SimplexState.FEASIBLE, pivots
+        return SimplexState.FEASIBLE, pivots, tableau
 
 
 def phase2(tableau, pivots):
@@ -206,14 +213,14 @@ def phase2(tableau, pivots):
     m -= 2
     n -= 2
     c = 0
-    while c < n:
+    while c <= n:
         # Only operate on columns where the value of that variable in the objective function is less than zero
         if tableau[m + 1][c] < 0:
             # Find the first positive entry in column c
             i = 0
             while tableau[i][c] <= 0 and i <= m:
                 i += 1
-            if i >= m:
+            if i > m:
                 return SimplexState.UNBOUNDED, None
             # Ratio of the entry in X_B over A[i][c]
             ratio = tableau[i][n + 1] / tableau[i][c]
@@ -223,7 +230,7 @@ def phase2(tableau, pivots):
             while i <= m:
                 if tableau[i][c] > 0 and tableau[i][n + 1] / tableau[i][c] < ratio:
                     ratio = tableau[i][n + 1] / tableau[i][c]
-                    r += 1
+                    r = i
                 i += 1
             pivot(tableau, r, c)
             pivots[r] = c
@@ -255,7 +262,7 @@ def simplex(tableau):
         return state, None, None
 
     # Run phase one and ensure the linear program is still feasible
-    state, pivots = phase1(tableau, pivots)
+    state, pivots, tableau = phase1(tableau, pivots)
     if state is not SimplexState.FEASIBLE:
         return state, None, None
 
@@ -275,14 +282,21 @@ def simplex(tableau):
 
 
 if __name__ == '__main__':
-    # tableau in sample2.txt CORRECT RESULT, DIFFERENT PHASE 1 DATA
+    # tableau in sample1.txt
+    # tab = np.array([[1, -3, 1, 0, -6], [1, -1, 0, 1, 0], [-3, 6, 0, 0, 0]], dtype=float)
+    # tableau in sample2.txt
     # tab = np.array([[1, 2, 2, 4, 1, 0, 0, 0, -7], [2, -1, -1, 2, 0, 1, 0, 0, 6], [-2, -1, 1, 1, 0, 0, 1, 0, -4],
     #                 [-7, 1, -3, 2, 0, 0, 0, 1, -8], [-1, -1, -1, -1, 0, 0, 0, 0, 0]], dtype=float)
-    # tableau in sample3.txt INCORRECT RESULT
-    tab = np.array([[1, 2, 3, 4, 1, 0, 0, 10], [-3, 2, -1, 4, 0, 1, 0, -10], [2, 1, 3, 4, 0, 0, 1, 10],
-                    [-2, -3, -1, -4, 0, 0, 0, 0]], dtype=float)
+    # tableau in sample3.txt
+    # tab = np.array([[1, 2, 3, 4, 1, 0, 0, 10], [-3, 2, -1, 4, 0, 1, 0, -10], [2, 1, 3, 4, 0, 0, 1, 10],
+    #                [-2, -3, -1, -4, 0, 0, 0, 0]], dtype=float)
+    # tableau in sample4.txt
+    # tab = np.array([[1, 2, -1, 4, 1, 0, 0, 10], [-3, 2, 3, 1, 0, 1, 0, -10], [2, -2, -2, 1, 0, 0, 1, 10],
+    #                 [-2, -3, 1, -4, 0, 0, 0, 0]], dtype=float)
+    # tableau in sample5.txt
+    tab = np.array([[-1, 2, 1, 0, 0, 4], [4, 3, 1, 1, 0, 24], [-2, -2, 0, 0, 1, -7], [7, 2, 0, 0, 0, 0]], dtype=float)
     simplex_state, values, solution = simplex(tab)
     if simplex_state is SimplexState.FEASIBLE:
-        print(f"The program is FEASIBLE with optimal solution {values} yielding z = {solution}")
+        print(f"The program is FEASIBLE with optimal solution {np.around(values, 2)} yielding z = {round(solution, 2)}")
     else:
-        print(f"The program is {simplex_state.name}")
+        print(f"The program is {simplex_state.name}.")
