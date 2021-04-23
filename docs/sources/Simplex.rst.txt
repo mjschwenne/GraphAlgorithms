@@ -1,0 +1,7 @@
+Simplex module
+==============
+
+.. automodule:: Simplex
+   :members:
+   :undoc-members:
+   :show-inheritance:

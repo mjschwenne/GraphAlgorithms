@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simplex module &#8212; Graph Algorithms 1.0 documentation</title>
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Prim module" href="Prim.html" />
+   
+  <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Simplex">
+<span id="simplex-module"></span><h1>Simplex module<a class="headerlink" href="#module-Simplex" title="Permalink to this headline">¶</a></h1>
+<p>This program performs the Simplex Algorithm on a linear program given in matrix form.</p>
+<p>There are three phases to the simplex algorithm.
+- Phase 0: Find a basis solution. This is accomplished using standard linear algebra techniques. First, we row reduce</p>
+<blockquote>
+<div><p>the initial tableau given to the program and then use the set of linearly independent rows to find the basis solution</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Phase 1: Find a basis feasible solution. One of the requirements of a linear program in standard form is that the
+value of every variable must be greater than or equal to zero, which is not a requirement in the phase 0 basis
+solution. To do this we introduce an artificial variable with a value of -1 for each negative entry in the solution
+vector. By row reducing or pivoting on the most negative, the smallest value, we can force all of the others to become
+positive. This creates a secondary objective function, which is always feasible. Applying a similar process to phase 2
+we attempt to reduce the value of the secondary objective function to zero. If this is possible then the current
+solution is a basis feasible solution.</p></li>
+<li><p>Phase 2: Improve the basis feasible solution. Moving from left to right across the bottom row of the tableau, find
+each negative value and pivot or row reduce an the positive valued entry in that column with the smallest ratio of
+solution entry over tableau entry. Each of these moves will push the solution towards the optimal one. Once all of
+the entries in the final row of the tableau are positive, the optimal solution has been found.</p></li>
+</ul>
+<p>This is a high level overview of the what the algorithm does, to understand why this works, please refer to the
+textbook.</p>
+<p>NumPy is used only for the ndarray data type and utility functions such as inserting rows and deleting rows.</p>
+<p>Algorithms 17.2.1, 17.2.2, 17.2.3, 17.2.4 and 17.2.5 on pages 459 - 472</p>
+<dl class="py class">
+<dt id="Simplex.SimplexState">
+<em class="property">class </em><code class="sig-prename descclassname">Simplex.</code><code class="sig-name descname">SimplexState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Simplex.SimplexState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt id="Simplex.SimplexState.FEASIBLE">
+<code class="sig-name descname">FEASIBLE</code><em class="property"> = 0</em><a class="headerlink" href="#Simplex.SimplexState.FEASIBLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Simplex.SimplexState.INFEASIBLE">
+<code class="sig-name descname">INFEASIBLE</code><em class="property"> = 1</em><a class="headerlink" href="#Simplex.SimplexState.INFEASIBLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="Simplex.SimplexState.UNBOUNDED">
+<code class="sig-name descname">UNBOUNDED</code><em class="property"> = 2</em><a class="headerlink" href="#Simplex.SimplexState.UNBOUNDED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="Simplex.phase0">
+<code class="sig-prename descclassname">Simplex.</code><code class="sig-name descname">phase0</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tableau</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Simplex.phase0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds a basis solution to the initial tableau</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>tableau</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>The initial tableau of the linear program</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>SimplexState</dt><dd><p>If we can continue to solve the linear program</p>
+</dd>
+<dt>List</dt><dd><p>Map of rows to there pivot column</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Simplex.phase1">
+<code class="sig-prename descclassname">Simplex.</code><code class="sig-name descname">phase1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tableau</span></em>, <em class="sig-param"><span class="n">pivots</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Simplex.phase1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs phase 1 of the simplex algorithm on the tableau, changing the basis solution into a basis feasible one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>tableau</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>The phase 1 tableau</p>
+</dd>
+<dt><strong>pivots</strong><span class="classifier">List</span></dt><dd><p>A list of pivots in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>SimplexState</dt><dd><p>If the linear program is still feasible or why not</p>
+</dd>
+<dt>List</dt><dd><p>The list of pivots in each row</p>
+</dd>
+<dt>numpy.ndarray</dt><dd><p>The new tableau… I’m not happy about returning this but we need to return the local tableau</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Simplex.phase2">
+<code class="sig-prename descclassname">Simplex.</code><code class="sig-name descname">phase2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tableau</span></em>, <em class="sig-param"><span class="n">pivots</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Simplex.phase2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs phase 2 of the simplex algorithm, improving the basis feasible solution, on the given tableau</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>tableau</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>The phase 2 tableau</p>
+</dd>
+<dt><strong>pivots</strong><span class="classifier">List</span></dt><dd><p>The pivot list returned from phase 1</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>SimplexState</dt><dd><p>If the linear program is unbounded or still feasible</p>
+</dd>
+<dt>List</dt><dd><p>Pivots in the complete tableau</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Simplex.pivot">
+<code class="sig-prename descclassname">Simplex.</code><code class="sig-name descname">pivot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tableau</span></em>, <em class="sig-param"><span class="n">row</span></em>, <em class="sig-param"><span class="n">col</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Simplex.pivot" title="Permalink to this definition">¶</a></dt>
+<dd><p>In place pivot in the tableau based on entry tableau[row][col]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>tableau</strong><span class="classifier">np.ndarray</span></dt><dd><p>The tableau or matrix we wish to pivot in</p>
+</dd>
+<dt><strong>row</strong><span class="classifier">int</span></dt><dd><p>The row of the entry we will pivot on</p>
+</dd>
+<dt><strong>col</strong><span class="classifier">int</span></dt><dd><p>The column of the entry we will pivot on</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="Simplex.simplex">
+<code class="sig-prename descclassname">Simplex.</code><code class="sig-name descname">simplex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tableau</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Simplex.simplex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs the simplex algorithm on the given initial tableau to find the optimal solution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>tableau</strong><span class="classifier">numpy.ndarray</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>SimplexState</dt><dd><p>Where the program was feasible, infeasible or unbounded</p>
+</dd>
+<dt>List</dt><dd><p>Values of each of the variables in the linear program</p>
+</dd>
+<dt>float</dt><dd><p>The optimal value of the objective function</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Graph Algorithms</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BreadthFirstSearch.html">BreadthFirstSearch module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChordlessPath.html">ChordlessPath module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Components.html">Components module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dijkstra.html">Dijkstra module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Floyd.html">Floyd module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FordFulkerson.html">FordFulkerson module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GraphGen.html">GraphGen module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hungarian.html">Hungarian module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kruskal.html">Kruskal module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Prim.html">Prim module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Simplex module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Prim.html" title="previous chapter">Prim module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Matt Schwennesen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="sources/Simplex.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
