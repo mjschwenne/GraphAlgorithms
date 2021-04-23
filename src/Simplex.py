@@ -1,7 +1,25 @@
 """
 This program performs the Simplex Algorithm on a linear program given in matrix form.
 
-NumPy is used only for the ndarray data type
+There are three phases to the simplex algorithm.
+- Phase 0: Find a basis solution. This is accomplished using standard linear algebra techniques. First, we row reduce
+  the initial tableau given to the program and then use the set of linearly independent rows to find the basis solution
+- Phase 1: Find a basis feasible solution. One of the requirements of a linear program in standard form is that the
+  value of every variable must be greater than or equal to zero, which is not a requirement in the phase 0 basis
+  solution. To do this we introduce an artificial variable with a value of -1 for each negative entry in the solution
+  vector. By row reducing or pivoting on the most negative, the smallest value, we can force all of the others to become
+  positive. This creates a secondary objective function, which is always feasible. Applying a similar process to phase 2
+  we attempt to reduce the value of the secondary objective function to zero. If this is possible then the current
+  solution is a basis feasible solution.
+- Phase 2: Improve the basis feasible solution. Moving from left to right across the bottom row of the tableau, find
+  each negative value and pivot or row reduce an the positive valued entry in that column with the smallest ratio of
+  solution entry over tableau entry. Each of these moves will push the solution towards the optimal one. Once all of
+  the entries in the final row of the tableau are positive, the optimal solution has been found.
+
+This is a high level overview of the what the algorithm does, to understand why this works, please refer to the
+textbook.
+
+NumPy is used only for the ndarray data type and utility functions such as inserting rows and deleting rows.
 
 Algorithms 17.2.1, 17.2.2, 17.2.3, 17.2.4 and 17.2.5 on pages 459 - 472
 """
