@@ -2,6 +2,7 @@
 This program performs the Simplex Algorithm on a linear program given in matrix form.
 
 There are three phases to the simplex algorithm.
+
 - Phase 0: Find a basis solution. This is accomplished using standard linear algebra techniques. First, we row reduce
   the initial tableau given to the program and then use the set of linearly independent rows to find the basis solution
 - Phase 1: Find a basis feasible solution. One of the requirements of a linear program in standard form is that the

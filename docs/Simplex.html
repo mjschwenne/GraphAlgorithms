@@ -35,12 +35,10 @@
   <div class="section" id="module-Simplex">
 <span id="simplex-module"></span><h1>Simplex module<a class="headerlink" href="#module-Simplex" title="Permalink to this headline">¶</a></h1>
 <p>This program performs the Simplex Algorithm on a linear program given in matrix form.</p>
-<p>There are three phases to the simplex algorithm.
-- Phase 0: Find a basis solution. This is accomplished using standard linear algebra techniques. First, we row reduce</p>
-<blockquote>
-<div><p>the initial tableau given to the program and then use the set of linearly independent rows to find the basis solution</p>
-</div></blockquote>
+<p>There are three phases to the simplex algorithm.</p>
 <ul class="simple">
+<li><p>Phase 0: Find a basis solution. This is accomplished using standard linear algebra techniques. First, we row reduce
+the initial tableau given to the program and then use the set of linearly independent rows to find the basis solution</p></li>
 <li><p>Phase 1: Find a basis feasible solution. One of the requirements of a linear program in standard form is that the
 value of every variable must be greater than or equal to zero, which is not a requirement in the phase 0 basis
 solution. To do this we introduce an artificial variable with a value of -1 for each negative entry in the solution
