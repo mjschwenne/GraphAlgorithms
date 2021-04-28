@@ -94,7 +94,7 @@ def phase0(tableau):
     while r <= m:
         c = 0
         # ... find the first columns with a non-zero entry
-        while tableau[r][c] == 0:
+        while tableau[r][c] == 0 and c <= n:
             c += 1
         if c > n:
             if tableau[r][n + 1] != 0:
@@ -253,7 +253,7 @@ def phase2(tableau, pivots):
                 i += 1
             pivot(tableau, r, c)
             pivots[r] = c
-            c = 1
+            c = -1
         c += 1
     return SimplexState.FEASIBLE, pivots
 
@@ -301,21 +301,24 @@ def simplex(tableau):
 
 
 if __name__ == '__main__':
-    # tableau in sample1.txt
-    # tab = np.array([[1, -3, 1, 0, -6], [1, -1, 0, 1, 0], [-3, 6, 0, 0, 0]], dtype=float)
-    # tableau in sample2.txt
-    # tab = np.array([[1, 2, 2, 4, 1, 0, 0, 0, -7], [2, -1, -1, 2, 0, 1, 0, 0, 6], [-2, -1, 1, 1, 0, 0, 1, 0, -4],
-    #                 [-7, 1, -3, 2, 0, 0, 0, 1, -8], [-1, -1, -1, -1, 0, 0, 0, 0, 0]], dtype=float)
-    # tableau in sample3.txt
-    # tab = np.array([[1, 2, 3, 4, 1, 0, 0, 10], [-3, 2, -1, 4, 0, 1, 0, -10], [2, 1, 3, 4, 0, 0, 1, 10],
-    #                [-2, -3, -1, -4, 0, 0, 0, 0]], dtype=float)
-    # tableau in sample4.txt
-    # tab = np.array([[1, 2, -1, 4, 1, 0, 0, 10], [-3, 2, 3, 1, 0, 1, 0, -10], [2, -2, -2, 1, 0, 0, 1, 10],
-    #                 [-2, -3, 1, -4, 0, 0, 0, 0]], dtype=float)
-    # tableau in sample5.txt
-    tab = np.array([[-1, 2, 1, 0, 0, 4], [4, 3, 1, 1, 0, 24], [-2, -2, 0, 0, 1, -7], [7, 2, 0, 0, 0, 0]], dtype=float)
+    # Read in the tableau from the same format as the sample files from my professor for pivot.c
+    with open('../linearPrograms/Final-5.txt') as tableau_file:
+        if tableau_file.readline() != "begin\n":
+            print("Tableau File Error!")
+            exit(-1)
+        tableau_size = tableau_file.readline().split()
+        tableau_size = [int(i) for i in tableau_size]
+        tab = np.empty((tableau_size[0], tableau_size[1]))
+        for line_index in range(tableau_size[0]):
+            line = tableau_file.readline().split()
+            line = [float(i) for i in line]
+            for entry_index in range(tableau_size[1]):
+                tab[line_index][entry_index] = line[entry_index]
+    print(f"Read initial tableau as\n{tab}")
+
     simplex_state, values, solution = simplex(tab)
     if simplex_state is SimplexState.FEASIBLE:
         print(f"The program is FEASIBLE with optimal solution {np.around(values, 2)} yielding z = {round(solution, 2)}")
+        print(f"The program is FEASIBLE with optimal solution {values} yielding z = {solution}")
     else:
         print(f"The program is {simplex_state.name}.")

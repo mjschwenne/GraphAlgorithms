@@ -1,0 +1,40 @@
+begin
+3 5
+ 1 -3  1  0  -6 
+ 1 -1  0  1   0
+-3  6  0  0   0
+end
+
+corresp. to the problem:
+
+min -3 x1 +6 x2
+
+st x1 -3 x2 + x3     = -6
+   x1 -  x2     + x4 =  0 
+   x1,   x2   x3, x4 >= 0
+
+
+
+Pivot sequence:
+
+0 0   /* no phase 0 necessary */
+1 0
+1 2
+0 0  /* End phase 1 */
+2 1
+0 0  /* End */
+
+Final tableau:
+
+PHASE 2
+         x 1    x 2    x 3    x 4      RHS
+ 1:     0.00   1.00  -0.50   0.50 |   3.00
+ 2:     1.00   0.00  -0.50   1.50 |   3.00
+      ----------------------------------------
+cost:   0.00   0.00   1.50   1.50 |  -9.00
+
+
+
+optimal solution: x1 = 3, x2 = 3, x3 = 0, x4 = 0    value: 9
+
+
