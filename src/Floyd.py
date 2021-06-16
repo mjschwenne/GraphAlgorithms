@@ -77,6 +77,8 @@ def floyd(G):
     return matrix
 
 
-if __name__ == '__main__':
-    graph = nx.readwrite.read_weighted_edgelist("../graphs/weighted_floyd.edgelist", nodetype=int)
+if __name__ == "__main__":
+    graph = nx.readwrite.read_weighted_edgelist(
+        "../graphs/weighted_floyd.edgelist", nodetype=int
+    )
     print(floyd(graph))

@@ -135,6 +135,6 @@ def print_components(G):
             print(f"Component Representative: {c[0]}, Component Members:", *c)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     graph = nx.readwrite.read_adjlist("../graphs/disconnected.adjlist", nodetype=int)
     print_components(graph)

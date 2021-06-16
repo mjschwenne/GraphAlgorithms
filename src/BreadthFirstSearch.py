@@ -87,6 +87,6 @@ def print_bfs_dist(G, u):
         print(f"Vertex {v}: Dist({u}, {v}) = {bfs_dist[v]}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     graph = nx.readwrite.read_adjlist("../graphs/petersen.adjlist", nodetype=int)
     print_bfs_dist(graph, 0)

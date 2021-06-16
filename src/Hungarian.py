@@ -84,6 +84,6 @@ def hungarian(G, X):
     return match
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     graph = nx.readwrite.read_adjlist("../graphs/bipartite.adjlist", nodetype=int)
     print(hungarian(graph, {0, 1, 2, 3}))

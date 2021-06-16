@@ -43,12 +43,14 @@ def dijkstra(G, u):
     while len(heap) != 0:
         dist_u, u = heapq.heappop(heap)
         for v in G[u]:
-            dist[v] = min(dist[v], dist_u + G[u][v]['weight'])
+            dist[v] = min(dist[v], dist_u + G[u][v]["weight"])
             heap_map[v][0] = dist[v]
             heapq.heapify(heap)
     return dist
 
 
-if __name__ == '__main__':
-    graph = nx.readwrite.read_weighted_edgelist("../graphs/weighted_sample.edgelist", nodetype=int)
+if __name__ == "__main__":
+    graph = nx.readwrite.read_weighted_edgelist(
+        "../graphs/weighted_sample.edgelist", nodetype=int
+    )
     print(dijkstra(graph, 0))

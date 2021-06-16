@@ -125,9 +125,11 @@ def display_graphic_seq(deg_seq):
     """
     graph = graphic(deg_seq)
     if graph is not None:
-        nx.draw_circular(graph, with_labels=True, font_weight='bold', font_color='white')
+        nx.draw_circular(
+            graph, with_labels=True, font_weight="bold", font_color="white"
+        )
         plt.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print_is_graphic([7, 6, 6, 6, 5, 5, 2, 1])

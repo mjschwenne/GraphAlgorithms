@@ -56,7 +56,10 @@ def pivot(tableau, row, col):
             # Iterate over that row and replace it with the reduced version
             scaling_factor = tableau[k][col]
             for h in range(n):
-                temp = tableau[k][h] - (scaling_factor / tableau[row][col]) * tableau[row][h]
+                temp = (
+                    tableau[k][h]
+                    - (scaling_factor / tableau[row][col]) * tableau[row][h]
+                )
                 tableau[k][h] = temp
         else:
             # If row k is the same row as the pivoting entry, scale the row so that the pivoting entry is one
@@ -300,9 +303,9 @@ def simplex(tableau):
     return SimplexState.FEASIBLE, x, -tableau[m + 1][n + 1]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Read in the tableau from the same format as the sample files from my professor for pivot.c
-    with open('../linearPrograms/Final-5.txt') as tableau_file:
+    with open("../linearPrograms/held-karp-1.txt") as tableau_file:
         if tableau_file.readline() != "begin\n":
             print("Tableau File Error!")
             exit(-1)
@@ -318,7 +321,11 @@ if __name__ == '__main__':
 
     simplex_state, values, solution = simplex(tab)
     if simplex_state is SimplexState.FEASIBLE:
-        print(f"The program is FEASIBLE with optimal solution {np.around(values, 2)} yielding z = {round(solution, 2)}")
-        print(f"The program is FEASIBLE with optimal solution {values} yielding z = {solution}")
+        print(
+            f"The program is FEASIBLE with optimal solution {np.around(values, 2)} yielding z = {round(solution, 2)}"
+        )
+        print(
+            f"The program is FEASIBLE with optimal solution {values} yielding z = {solution}"
+        )
     else:
         print(f"The program is {simplex_state.name}.")

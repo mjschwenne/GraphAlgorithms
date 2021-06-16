@@ -37,9 +37,9 @@ def augment_flow(N, t, prev_pt, res_cap):
     # While we are not at the start of the augmenting path
     while u is not None:
         if v in N[u]:
-            N[u][v]['flow'] += delta
+            N[u][v]["flow"] += delta
         else:
-            N[v][u]['flow'] -= delta
+            N[v][u]["flow"] -= delta
         v = u
         u = prev_pt[v]
 
@@ -67,11 +67,11 @@ def ford_fulkerson(N, s, t):
     # Ensure that the current flow of the network is the zero flow and initialize the residual capacity dict
     flow = 0
     for u, v in N.edges:
-        N[u][v]['flow'] = 0
+        N[u][v]["flow"] = 0
     res_cap = {s: 0}
     for v in N[s]:
-        res_cap[s] += N[s][v]['capacity']
-        res_cap[v] = N[s][v]['capacity']
+        res_cap[s] += N[s][v]["capacity"]
+        res_cap[v] = N[s][v]["capacity"]
     # Create and initialize the prev_pt list used to track the breadth first search of the algorithm
     prev_pt = {s: None}
     # While there could be an augmenting path in the graph
@@ -91,26 +91,26 @@ def ford_fulkerson(N, s, t):
                 if v not in q:
                     # If uv is a forward edge
                     if v in N[u]:
-                        if N[u][v]['capacity'] > N[u][v]['flow']:
+                        if N[u][v]["capacity"] > N[u][v]["flow"]:
                             q.append(v)
                             prev_pt[v] = u
-                            if res_cap[u] < N[u][v]['capacity'] - N[u][v]['flow']:
+                            if res_cap[u] < N[u][v]["capacity"] - N[u][v]["flow"]:
                                 res_cap[v] = res_cap[u]
                             else:
-                                res_cap[v] = N[u][v]['capacity'] - N[u][v]['flow']
+                                res_cap[v] = N[u][v]["capacity"] - N[u][v]["flow"]
                             if v == t:
                                 # Augmenting path has been found
                                 aug_path = True
                                 break
                     # If uv is a backwards edge
                     else:
-                        if N[v][u]['flow'] > 0:
+                        if N[v][u]["flow"] > 0:
                             q.append(v)
                             prev_pt[v] = u
-                            if res_cap[u] < N[v][u]['flow']:
+                            if res_cap[u] < N[v][u]["flow"]:
                                 res_cap[v] = res_cap[u]
                             else:
-                                res_cap[v] = N[v][u]['flow']
+                                res_cap[v] = N[v][u]["flow"]
                             if v == t:
                                 # Augmenting path has been found
                                 aug_path = True
@@ -125,8 +125,10 @@ def ford_fulkerson(N, s, t):
         prev_pt = {s: None}
 
 
-if __name__ == '__main__':
-    network = nx.read_edgelist("../graphs/hw8.edgelist", create_using=nx.DiGraph, nodetype=int)
+if __name__ == "__main__":
+    network = nx.read_edgelist(
+        "../graphs/hw8.edgelist", create_using=nx.DiGraph, nodetype=int
+    )
     print(f"The total value of the flow is {ford_fulkerson(network, 0, 7)}")
     for x, y in network.edges:
         print(f"For edge {x} -> {y} the flow is {network[x][y]['flow']}")

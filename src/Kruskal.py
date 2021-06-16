@@ -85,7 +85,7 @@ def kruskal(G):
     # Create an construct the heap of edges
     heap = []
     for e in G.edges:
-        heapq.heappush(heap, [G[e[0]][e[1]]['weight'], (e[0], e[1])])
+        heapq.heappush(heap, [G[e[0]][e[1]]["weight"], (e[0], e[1])])
 
     # While we don't have enough edges to make a tree
     while tree.number_of_edges() < len(G) - 1:
@@ -99,10 +99,10 @@ def kruskal(G):
     return tree
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     graph = nx.readwrite.read_weighted_edgelist("../graphs/prim.edgelist", nodetype=int)
     mst = kruskal(graph)
-    nx.draw_circular(graph, with_labels=True, font_weight='bold', font_color='white')
+    nx.draw_circular(graph, with_labels=True, font_weight="bold", font_color="white")
     plt.show()
-    nx.draw_circular(mst, with_labels=True, font_weight='bold', font_color='white')
+    nx.draw_circular(mst, with_labels=True, font_weight="bold", font_color="white")
     plt.show()

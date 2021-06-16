@@ -35,7 +35,7 @@ def prim(G):
     for e in G.edges:
         # Cast everything into tuples so that I can compare them directly and construct new ones later in the algorithm
         if 0 in e:
-            heap_map[(e[0], e[1])] = [G[e[0]][e[1]]['weight'], (e[0], e[1])]
+            heap_map[(e[0], e[1])] = [G[e[0]][e[1]]["weight"], (e[0], e[1])]
         else:
             heap_map[(e[0], e[1])] = [math.inf, (e[0], e[1])]
         heapq.heappush(heap, heap_map[e])
@@ -49,9 +49,9 @@ def prim(G):
             # Update the heap
             for v in G[e[0]]:
                 if (v, e[0]) in heap_map.keys():
-                    heap_map[(v, e[0])][0] = G[v][e[0]]['weight']
+                    heap_map[(v, e[0])][0] = G[v][e[0]]["weight"]
                 else:
-                    heap_map[(e[0], v)][0] = G[v][e[0]]['weight']
+                    heap_map[(e[0], v)][0] = G[v][e[0]]["weight"]
             heapq.heapify(heap)
         if e[1] not in vt and e[0] in vt:
             vt.add(e[1])
@@ -59,18 +59,18 @@ def prim(G):
             # Update the heap
             for v in G[e[1]]:
                 if (v, e[1]) in heap_map.keys():
-                    heap_map[(v, e[1])][0] = G[v][e[1]]['weight']
+                    heap_map[(v, e[1])][0] = G[v][e[1]]["weight"]
                 else:
-                    heap_map[(e[1], v)][0] = G[v][e[1]]['weight']
+                    heap_map[(e[1], v)][0] = G[v][e[1]]["weight"]
             heapq.heapify(heap)
 
     return tree
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     graph = nx.readwrite.read_weighted_edgelist("../graphs/prim.edgelist", nodetype=int)
     mst = prim(graph)
-    nx.draw_circular(graph, with_labels=True, font_weight='bold', font_color='white')
+    nx.draw_circular(graph, with_labels=True, font_weight="bold", font_color="white")
     plt.show()
-    nx.draw_circular(mst, with_labels=True, font_weight='bold', font_color='white')
+    nx.draw_circular(mst, with_labels=True, font_weight="bold", font_color="white")
     plt.show()
